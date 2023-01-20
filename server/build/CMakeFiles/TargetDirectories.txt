@@ -1,0 +1,3 @@
+/home/kuba/Desktop/qtserver/build/CMakeFiles/server.dir
+/home/kuba/Desktop/qtserver/build/CMakeFiles/edit_cache.dir
+/home/kuba/Desktop/qtserver/build/CMakeFiles/rebuild_cache.dir
