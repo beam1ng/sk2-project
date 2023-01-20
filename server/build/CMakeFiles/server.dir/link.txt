@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/server.dir/src/main.cpp.o CMakeFiles/server.dir/src/serverlogic.cpp.o -o server 
