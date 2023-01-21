@@ -33,14 +33,9 @@ void CategorySelector::selectCategory(){
     sendStruct(reinterpret_cast<char*>(&req),sizeof(req));
 }
 
-void CategorySelector::sendStruct(char* data, int size){//unsafe, can block
+void CategorySelector::sendStruct(char* data, int size){
     int sentSize = 0;
-    //QDataStream stream(sock);
     while(sentSize<size){
-        //sentSize+= stream.writeRawData(data+sentSize,size-sentSize);
         sentSize+= sock->write(data+sentSize,size-sentSize);
     }
 }
-
-
-//so i added a lot of things following category selection but havent tested it yet

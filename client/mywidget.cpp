@@ -82,16 +82,13 @@ void MyWidget::socketError(QTcpSocket::SocketError err){
 void MyWidget::socketReadable(){
     while(sock->bytesAvailable()){
 
-        //QDataStream stream(sock);
         DataStructures::serverCommands serverCommand;
 
-        //stream.readRawData(reinterpret_cast<char*>(&serverCommand),sizeof(serverCommand));
         readStruct(reinterpret_cast<char*>(&serverCommand),sizeof(serverCommand));
 
         switch(serverCommand){
         case DataStructures::answerNicknameProposal:{
             DataStructures::answerNicknameProposalStruct req{};
-            //stream.readRawData(reinterpret_cast<char*>(&req)+sizeof(serverCommand),sizeof(req)-sizeof(serverCommand));
             readStruct(reinterpret_cast<char*>(&req)+sizeof(serverCommand),sizeof(req)-sizeof(serverCommand));
             if(req.isApproved){
                 ns->hide();
@@ -105,11 +102,8 @@ void MyWidget::socketReadable(){
             DataStructures::quizCategoriesStruct req{};
             readStruct(reinterpret_cast<char*>(&req)+sizeof(serverCommand),sizeof(req)-sizeof(serverCommand));
 
-
-            //show categoryselector
             cs->show();
 
-            //just update cs, and then sometime cs will send data to server with chosen categoryindex
             std::string categories[8]={""};
             for(int i = 0;i<8;i++){
                 categories[i]=std::string(req.categoryNames[i]);
@@ -121,7 +115,6 @@ void MyWidget::socketReadable(){
             DataStructures::chooseQuizCategoryResultStruct req{};
             readStruct(reinterpret_cast<char*>(&req)+sizeof(serverCommand),sizeof(req)-sizeof(serverCommand));
 
-            //show lv
             cs->hide();
             lv->show();
 
@@ -129,7 +122,6 @@ void MyWidget::socketReadable(){
         }
         case DataStructures::joinLobbyResult:{
             DataStructures::joinLobbyResultStruct req{};
-            //stream.readRawData(reinterpret_cast<char*>(&req)+sizeof(serverCommand),sizeof(req)-sizeof(serverCommand));
             readStruct(reinterpret_cast<char*>(&req)+sizeof(serverCommand),sizeof(req)-sizeof(serverCommand));
             if(req.isSuccess){
                 lb->hide();
@@ -142,7 +134,6 @@ void MyWidget::socketReadable(){
         }
         case DataStructures::lobbyDetails:{
             DataStructures::lobbyDetailsStruct ld{};
-            //stream.readRawData(reinterpret_cast<char*>(&ld)+sizeof(serverCommand),sizeof(ld)-sizeof(serverCommand));
             readStruct(reinterpret_cast<char*>(&ld)+sizeof(serverCommand),sizeof(ld)-sizeof(serverCommand));
             lv->clearPlayers();
             if(ns->isTheSameNickname(std::string(ld.hostNickname))){
@@ -160,8 +151,8 @@ void MyWidget::socketReadable(){
             DataStructures::gameQuestionStruct gq{};
 
             readStruct(reinterpret_cast<char*>(&gq)+sizeof(serverCommand),sizeof(gq)-sizeof(serverCommand));
-            //if hidden, hide current and show questionUI
             if(q->isHidden()){
+                cs->hide();
                 lv->hide();
                 q->show();
             }
@@ -199,27 +190,16 @@ void MyWidget::socketReadable(){
     }
 }
 
-void MyWidget::sendBtnHit(){
-    //auto txt = ui->msgLineEdit->text().trimmed();
-    //if(txt.isEmpty())
-    //    return;
-    //sock->write((txt+'\n').toUtf8());
-}
-
-void MyWidget::readStruct(char* buffer,int size){//unsafe, can block
+void MyWidget::readStruct(char* buffer,int size){
     int redSize = 0;
-    //QDataStream stream(sock);
     while(redSize<size){
-        //redSize+= stream.readRawData(buffer,size-redSize);
         redSize+= sock->read(buffer,size-redSize);
     }
 }
 
-void MyWidget::sendStruct(char* data, int size){//unsafe, can block
+void MyWidget::sendStruct(char* data, int size){
     int sentSize = 0;
-    //QDataStream stream(sock);
     while(sentSize<size){
-        //sentSize+= stream.writeRawData(data+sentSize,size-sentSize);
         sentSize+= sock->write(data+sentSize,size-sentSize);
     }
 }

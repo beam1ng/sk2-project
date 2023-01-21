@@ -29,11 +29,9 @@ void LobbyView::startGame(){
     sendStruct(reinterpret_cast<char*>(&req),sizeof(req));
 }
 
-void LobbyView::sendStruct(char* data, int size){//unsafe, can block
+void LobbyView::sendStruct(char* data, int size){
     int sentSize = 0;
-    //QDataStream stream(sock);
     while(sentSize<size){
-        //sentSize+= stream.writeRawData(data+sentSize,size-sentSize);
         sentSize+= sock->write(data+sentSize,size-sentSize);
     }
 }

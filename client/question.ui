@@ -14,50 +14,34 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0" colspan="2">
-    <widget class="QTextBrowser" name="questionTb"/>
-   </item>
    <item row="2" column="0">
-    <widget class="QPushButton" name="aPb">
-     <property name="text">
-      <string>A</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QPushButton" name="bPb">
-     <property name="text">
-      <string>B</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
     <widget class="QPushButton" name="cPb">
      <property name="text">
       <string>C</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
+   <item row="1" column="1">
+    <widget class="QPushButton" name="bPb">
+     <property name="text">
+      <string>B</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QTextBrowser" name="questionTb"/>
+   </item>
+   <item row="2" column="1">
     <widget class="QPushButton" name="dPb">
      <property name="text">
       <string>D</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QProgressBar" name="answerTimeBar">
-     <property name="maximum">
-      <number>20</number>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="invertedAppearance">
-      <bool>false</bool>
-     </property>
-     <property name="format">
-      <string>%v / %m</string>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="aPb">
+     <property name="text">
+      <string>A</string>
      </property>
     </widget>
    </item>

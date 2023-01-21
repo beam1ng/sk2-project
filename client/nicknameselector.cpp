@@ -25,8 +25,6 @@ void NicknameSelector::sendNicknameProposal(){
     NicknameSelector::nickname = ui->nicknameLineEdit->text().toStdString();
     strncpy(pn.nickname,NicknameSelector::nickname.c_str(),32);
 
-    //QDataStream stream(sock);
-    //stream.writeRawData(reinterpret_cast<const char*>(&pn),sizeof(pn));
     sendStruct(reinterpret_cast<char*>(&pn),sizeof(pn));
 }
 
@@ -34,7 +32,7 @@ void NicknameSelector::displayNicknameAlreadyExist(){
     ui->nicknameExistsLabel->show();
 }
 
-void NicknameSelector::sendStruct(char* data, int size){//unsafe, can block
+void NicknameSelector::sendStruct(char* data, int size){
     int sentSize = 0;
     QDataStream stream(sock);
     while(sentSize<size){

@@ -68,7 +68,7 @@ public:
     struct lobbyDetailsStruct{
         serverCommands commandIndex = DataStructures::lobbyDetails;
         char hostNickname[32] = {'\0'};
-        char nicknames[4][32] = {'\0'};
+        char nicknames[4][32] = {{'\0'}};
     };
 
     struct joinLobbyResultStruct{
@@ -80,7 +80,7 @@ public:
     struct gameQuestionStruct{
         serverCommands commandIndex = DataStructures::gameQuestion;
         char question[64];
-        char answers[4][32] = {'\0'};
+        char answers[4][32] = {{'\0'}};
     };
 
     struct gameSummaryStruct{
@@ -93,7 +93,7 @@ public:
         bool isApproved;
     };
 
-    //hardcoded 8 category names
+    //hardcoded max 8 category names
     struct quizCategoriesStruct{
         serverCommands commandIndex = DataStructures::quizCategories;
         char categoryNames[8][16];

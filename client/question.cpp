@@ -63,11 +63,9 @@ void Question::answerQuestion(char answer){
     sendStruct(data,size);
 }
 
-void Question::sendStruct(char* data, int size){//unsafe, can block
+void Question::sendStruct(char* data, int size){
     int sentSize = 0;
-    //QDataStream stream(sock);
     while(sentSize<size){
-        //sentSize+= stream.writeRawData(data+sentSize,size-sentSize);
         sentSize+= sock->write(data+sentSize,size-sentSize);
     }
 }
