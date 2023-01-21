@@ -25,7 +25,7 @@ void CategorySelector::updateCategories(std::string categories[]){
 }
 
 void CategorySelector::selectCategory(){
-    int categoryIndex = ui->categoriesLw->indexFromItem(ui->categoriesLw->selectedItems().first()).row();
+    int categoryIndex = ui->categoriesLw->row(ui->categoriesLw->selectedItems().first());
 
     DataStructures::chooseQuizCategoryRequest req{};
     req.categoryIndex = categoryIndex;
