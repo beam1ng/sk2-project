@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LobbyBrowser</class>
+ <widget class="QDialog" name="LobbyBrowser">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>126</width>
+    <height>102</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLineEdit" name="lobbyCodeLineEdit">
+     <property name="placeholderText">
+      <string>Lobby code</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="JoinLobbyPb">
+     <property name="text">
+      <string>Join</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="CreateLobbyPb">
+     <property name="text">
+      <string>Create</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
