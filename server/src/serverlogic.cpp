@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <unistd.h>
+#include <chrono>
 
 ServerLogic::ServerLogic(){
 }
@@ -119,6 +120,7 @@ int ServerLogic::Game::nextPhase()
     //todo: start timer with nextPhase() lambda on timer end
 
     ServerLogic::Game::currentQuestionIndex++;
+    ServerLogic::Game::questionStart = std::chrono::high_resolution_clock::now();
 
     if(currentQuestionIndex>=totalQuestionsCount){
         //summary
@@ -362,6 +364,7 @@ void ServerLogic::readPackage(User *u){
 void ServerLogic::nextGamePhase(Game* g){
     bool shouldSummarise = (1==g->nextPhase());
     if(shouldSummarise){
+        g->shouldTimerTick=false;
         for(int i = 0;i<g->players.size();i++){
             User* u = g->players[i];
             DataStructures::gameSummaryStruct gs{};
@@ -407,4 +410,17 @@ DataStructures::qaBundle ServerLogic::Game::getCorrectQaBundle(){
         break;
     }
     };
+}
+
+void ServerLogic::updateGames(){
+    int gamesCount = games.size();
+    auto now = std::chrono::high_resolution_clock::now();
+    for(int i = 0;i<gamesCount;i++){
+        if(games[i]->shouldTimerTick){
+            auto questionDuration = std::chrono::duration_cast<std::chrono::seconds>(now-games[i]->questionStart);
+            if(questionDuration.count()>=games[i]->secondsPerQuestion){
+                nextGamePhase(games[i]);
+            }
+        }
+    }
 }
