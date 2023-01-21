@@ -2,6 +2,7 @@
 #define MYWIDGET_H
 
 #include "datastructures.h"
+#include <chrono>
 
 class ServerLogic
 {
@@ -38,6 +39,9 @@ protected:
         Game(User * host, ServerLogic * parent);
         ~Game(){};
 
+        bool shouldTimerTick = true;
+        std::chrono::time_point<std::chrono::high_resolution_clock> questionStart;
+        int secondsPerQuestion = 10;
         ServerLogic * parent;
         User * host;
         std::vector<User*> players;
@@ -64,6 +68,7 @@ public:
     std::vector<User*> users;
     void userDisconnected(int socket);
     void readPackage(int socket);
+    void updateGames();
 
 private:
     std::vector<std::string> nicknames;
