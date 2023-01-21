@@ -1,6 +1,6 @@
 ### To build server on linux:
 1. Navigate to sk2-project/server.
-2. Create folder "build".
+2. Create folder "build" and navigate to it.
 3. Run "cmake .."
 4. Run "make"
 5. At this point, an executable named "server" should be present in the build folder.
@@ -10,8 +10,8 @@ ___
 
 ### To build client on linux:
 1. Navigate to sk2-project/client.
-2. Create folder "build".
-3. Run "/opt/Qt/6.4.2/gcc_64/bin/qmake ../client.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug"
+2. Create folder "build" and navigate to it.
+4. Run "/opt/Qt/6.4.2/gcc_64/bin/qmake ../client.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug"
 
 IMPORTANT: "/opt/Qt/6.4.2/gcc_64/bin/qmake" is an example location and you should change it to match yours.
 
