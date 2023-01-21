@@ -1,6 +1,6 @@
 ### To build server on linux:
 1. Navigate to sk2-project/server.
-2. Create folder "build".
+2. Create folder "build" and navigate to it.
 3. Run "cmake .."
 4. Run "make"
 5. At this point, an executable named "server" should be present in the build folder.
