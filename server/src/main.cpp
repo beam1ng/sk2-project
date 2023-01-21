@@ -5,6 +5,7 @@
 #include <arpa/inet.h>
 #include <cstdio>
 #include <unistd.h>
+#include <thread>
 #define MAX_SOCKETS_COUNT 16
 
 int serverSocket;
@@ -53,6 +54,14 @@ void handleClientSocketData(int socketIndex){
     }
 }
 
+void stateUpdater(){
+    while(true){
+        sl.updateGames();
+        usleep(100000);//10 ticks each second
+    }
+    return;
+}
+
 int main(int argc, char *argv[])
 {
     if(argc!=2){
@@ -74,6 +83,8 @@ int main(int argc, char *argv[])
     pollDescriptors[0].fd=serverSocket;
     pollDescriptors[0].events=POLLIN;
     pollDescriptorAviability[0]=1;
+
+    std::thread t1(stateUpdater);
 
     while(true){
         int readyCount = poll(pollDescriptors,MAX_SOCKETS_COUNT,-1);
