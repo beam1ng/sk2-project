@@ -19,7 +19,10 @@ void ServerLogic::userDisconnected(User* u){
         bool isPlayerContained = playerIterator!=currentLobby->players.end();
         if(isPlayerContained){
             if(currentLobby->host==u){
-                //todo: send lobbyClosedByHost to players
+                for(int j = 0;j<lobbies[i]->players.size();j++){
+                    DataStructures::gameClosedByHostStruct gcbh{};
+                    sendStruct(lobbies[i]->players[j],reinterpret_cast<char*>(&gcbh),sizeof(gcbh));
+                }
 
                 lobbies.erase(lobbies.begin()+i);
             }else{
@@ -198,8 +201,6 @@ void ServerLogic::readPackage(User *u){
         readStruct(u,reinterpret_cast<char*>(&req)+sizeof(clientCommand),sizeof(req)-sizeof(clientCommand));
 
         Lobby* lobby = nullptr;
-
-        printf("lobbiesCount:%d\n",lobbies.size());
 
         for(int i = 0;i<lobbies.size();i++){
             printf("li:%d\n",i);

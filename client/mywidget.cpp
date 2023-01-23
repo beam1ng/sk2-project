@@ -181,6 +181,7 @@ void MyWidget::socketReadable(){
             DataStructures::gameClosedByHostStruct gcbh{};
             readStruct(reinterpret_cast<char*>(&gcbh)+sizeof(serverCommand),sizeof(gcbh)-sizeof(serverCommand));
             q->hide();
+            lv->hide();
             lb->show();
             break;
         }

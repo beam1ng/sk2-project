@@ -23,7 +23,6 @@ void handleServerSocketData(int revents){
         auto clientSocket = accept(serverSocket, (sockaddr*) &clientAddr, &clientAddrSize);
         for (int i = 0;i<MAX_SOCKETS_COUNT;i++){
             if(pollDescriptorAviability[i]==0){
-                printf("i:%d\n",i);
                 pollDescriptors[i].fd = clientSocket;
                 pollDescriptors[i].events = POLLIN|POLLRDHUP;
                 pollDescriptorAviability[i]=1;
@@ -44,8 +43,6 @@ void handleClientSocketData(int socketIndex){
         pollDescriptorAviability[socketIndex] = 0;
         shutdown(clientSocket,SHUT_RDWR);
         close(clientSocket);
-        clientSocket = -1;
-        printf("revent:%x\n",revents);
     }
     else if(revents & POLLIN){
         sl.readPackage(clientSocket);
